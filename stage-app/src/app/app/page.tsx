@@ -99,6 +99,7 @@ export default function AppPage() {
     { id: 'look', label: 'Shop Look', icon: Sparkles },
     { id: 'drops', label: 'Drops', icon: Moon },
     { id: 'custom', label: 'Customise', icon: Palette },
+    { id: 'cart', label: 'Bag', icon: ShoppingBag },
   ];
 
   return (
@@ -160,8 +161,11 @@ export default function AppPage() {
         {/* Action icons */}
         <div className="flex items-center gap-3">
           <button
-            onClick={() => setActiveTab('cart')}
-            className="relative p-2.5 rounded-full bg-[#FAF4E8] border border-[#40214B]/15 text-[#40214B] hover:bg-white shadow-2xs transition-colors"
+            onClick={() => {
+              setActiveStorefrontId(null);
+              setActiveTab('cart');
+            }}
+            className="relative p-2.5 rounded-full bg-[#FAF4E8] border border-[#40214B]/15 text-[#40214B] hover:bg-white shadow-2xs transition-colors cursor-pointer"
             aria-label="View Cart"
           >
             <ShoppingBag className="w-4 h-4" />
@@ -181,6 +185,10 @@ export default function AppPage() {
             businessId={activeStorefrontId}
             highlightProductId={highlightProductId}
             onBack={() => setActiveStorefrontId(null)}
+            onOpenCart={() => {
+              setActiveStorefrontId(null);
+              setActiveTab('cart');
+            }}
             onAddToCart={handleAddToCart}
           />
         ) : activeTab === 'cart' ? (
@@ -238,6 +246,11 @@ export default function AppPage() {
                 title={item.label}
               >
                 <Icon className={`w-5 h-5 ${isActive ? 'stroke-[2.5]' : 'stroke-[1.8]'}`} />
+                {item.id === 'cart' && totalCartCount > 0 && (
+                  <span className="absolute top-1 right-2 bg-[#E2532F] text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                    {totalCartCount}
+                  </span>
+                )}
                 {isActive && (
                   <div className="absolute -bottom-0.5 w-1 h-1 rounded-full bg-[#EE9A22]" />
                 )}

@@ -9,10 +9,11 @@ interface StorefrontProps {
   businessId: string;
   highlightProductId?: string;
   onBack: () => void;
+  onOpenCart?: () => void;
   onAddToCart: (product: any) => void;
 }
 
-export default function StorefrontModal({ businessId, highlightProductId, onBack, onAddToCart }: StorefrontProps) {
+export default function StorefrontModal({ businessId, highlightProductId, onBack, onOpenCart, onAddToCart }: StorefrontProps) {
   const [isFollowing, setIsFollowing] = useState(false);
   const [activeCategory, setActiveCategory] = useState('All');
   const [addedItemIds, setAddedItemIds] = useState<Set<string>>(new Set());
@@ -68,9 +69,21 @@ export default function StorefrontModal({ businessId, highlightProductId, onBack
           {business.name}’s Stage
         </span>
 
-        <button className="p-2 rounded-full bg-[#F3EAD9] text-[#40214B] hover:bg-white shadow-2xs">
-          <Share2 className="w-4 h-4" />
-        </button>
+        <div className="flex items-center gap-2">
+          {onOpenCart && (
+            <button
+              onClick={onOpenCart}
+              className="p-2 rounded-full bg-[#FAF4E8] text-[#40214B] border border-[#40214B]/15 hover:bg-white shadow-2xs flex items-center gap-1.5 text-xs font-bold"
+              aria-label="View Bag"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              <span className="hidden sm:inline">Bag</span>
+            </button>
+          )}
+          <button className="p-2 rounded-full bg-[#F3EAD9] text-[#40214B] hover:bg-white shadow-2xs">
+            <Share2 className="w-4 h-4" />
+          </button>
+        </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
