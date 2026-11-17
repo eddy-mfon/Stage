@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>STAGE — Where Small Businesses Take the Stage</title>
+  <meta name="description" content="A social-commerce platform built on a theatre metaphor: performers put something of themselves on stage, and audiences discover a person, not just a product.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Fraunces:opsz,wght@9..144,400..700;9..144,400..700i&family=Pinyon+Script&display=swap">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- Shared SVG Icons Definition -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><circle cx="17" cy="9.5" r="2.4"/><path d="M17.5 14.6c2.3.2 3.9 1.9 3.9 4.4"/></symbol>
+      <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
+      <symbol id="i-box" viewBox="0 0 24 24"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v8"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></symbol>
+      <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5 8 12l7 7"/></symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2.5l2 6.3 6.5 2.2-6.5 2.2-2 6.3-2-6.3L3.5 11l6.5-2.2z"/></symbol>
+      <symbol id="i-mega" viewBox="0 0 24 24"><path d="M4 10v4h3l7 4V6L7 10z"/><path d="M17 9.5a3.5 3.5 0 0 1 0 5"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+      <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4"/><path d="M5 12v7h14v-7"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+      <symbol id="i-list" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1.5"/><circle cx="4" cy="12" r="1.5"/><circle cx="4" cy="18" r="1.5"/></symbol>
+      <symbol id="i-bubble" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="8" cy="9" r="2"/></symbol>
+      <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M17.5 6.5A7.8 7.8 0 0 0 12 4.2a7.8 7.8 0 0 0-6.8 11.6L4 20l4.3-1.1a7.8 7.8 0 0 0 3.7.9h0a7.8 7.8 0 0 0 7.8-7.8c0-2.1-.8-4-2.3-5.5z"/></symbol>
+      <symbol id="i-telegram" viewBox="0 0 24 24"><path d="m21.5 3.5-19 7.3c-1.3.5-1.3 1.3-.2 1.6l4.9 1.5 11.3-7.1c.5-.3 1-.1.6.2l-9.2 8.3-.3 4.5c.5 0 .7-.2 1-.5l2.4-2.3 5 3.7c.9.5 1.6.3 1.8-.8l3.3-15.6c.3-1.3-.5-1.9-1.6-1.3z"/></symbol>
+      <symbol id="i-status" viewBox="0 0 60 12">
+        <rect x="0" y="7.5" width="3" height="4.5" rx=".8"/><rect x="5" y="5" width="3" height="7" rx=".8"/><rect x="10" y="2.5" width="3" height="9.5" rx=".8"/><rect x="15" y="0" width="3" height="12" rx=".8"/>
+        <path d="M27 4.2a7 7 0 0 1 10 0l-1.5 1.6a4.8 4.8 0 0 0-7 0zM29.6 7a3.4 3.4 0 0 1 4.8 0L32 9.6z"/>
+        <rect x="43" y=".75" width="15" height="10.5" rx="3" fill="none" stroke="currentColor" stroke-opacity=".5"/><rect x="44.6" y="2.35" width="11" height="7.3" rx="1.8"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- 1. Minimalist Top Navigation -->
+  <header class="site-nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-brand">
+          <span class="nav-brand-spark"><svg><use href="#i-spark"/></svg></span>
+          <span>STAGE</span>
+        </a>
+
+        <ul class="nav-menu">
+          <li><a href="#vision" class="nav-link">The Vision</a></li>
+          <li><a href="#experience" class="nav-link">Interactive Show</a></li>
+          <li><a href="#manifesto" class="nav-link">Trust Principles</a></li>
+          <li><a href="#journeys" class="nav-link">The Journeys</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button id="soundToggleBtn" class="btn-sound" aria-label="Toggle Sound" title="Sound Effects">
+            <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          </button>
+          <a href="#experience" class="btn-pill-dark" id="navForkBtn">Take the Stage</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Hero Section: The Theatre Metaphor & Entry Fork -->
+  <section class="hero-ref" id="vision">
+    <div class="container">
+      
+      <div class="hero-fork-badge">
+        <svg class="ic sm fill" style="fill:var(--gold);"><use href="#i-spark"/></svg>
+        <span>The Theatre of Small Business</span>
+      </div>
+
+      <h1 class="hero-ref-title">
+        Discover a person,<br>not just a product.
+      </h1>
+
+      <p class="hero-ref-sub">
+        Stage is where you don't have to be a big business to have a home online. Performers put something of themselves on stage — their craft, their story, their <em>opening note</em>. The audience comes to watch, understand, and root for someone.
+      </p>
+
+      <!-- The Core Entry Fork (Spec §4 & §5) -->
+      <div class="hero-fork-grid">
+        <button class="btn-fork btn-fork-performer" id="heroForkPerformer" data-target-mode="performer">
+          <div class="fork-icon-wrap">
+            <svg class="ic md fill" style="fill:var(--gold);"><use href="#i-spark"/></svg>
+          </div>
+          <div>
+            <div style="font-size:15px; line-height:1.2;">I'm here to perform</div>
+            <div style="font-size:11.5px; opacity:0.75; font-weight:500;">Build your Stage before registering</div>
+          </div>
+        </button>
+
+        <button class="btn-fork btn-fork-audience" id="heroForkAudience" data-target-mode="audience">
+          <div class="fork-icon-wrap">
+            <svg class="ic md"><use href="#i-users"/></svg>
+          </div>
+          <div>
+            <div style="font-size:15px; line-height:1.2;">I'm here for the show</div>
+            <div style="font-size:11.5px; opacity:0.75; font-weight:500;">Discover real sellers, drops & custom picks</div>
+          </div>
+        </button>
+      </div>
+
+      <div class="hero-cta-subtext" style="margin-top: 14px;">
+        Zero listing fees · 0% commission · Direct WhatsApp & Telegram order routing
+      </div>
+
+      <!-- Hero Window Mockup with Opening Night & Opening Note Spotlight -->
+      <div class="hero-window-wrapper">
+        <div class="hero-window-glow"></div>
+        <div class="hero-app-window">
+          <div class="window-header-dots">
+            <i></i><i></i><i></i>
+          </div>
+
+          <div class="hero-window-left">
+            <span class="opening-night-pill" style="margin-bottom: 12px;">
+              <svg class="ic sm fill"><use href="#i-spark"/></svg>
+              <span>Opening Night Discovery Active</span>
+            </span>
+            <h3>"A stranger sees the person before they see the price."</h3>
+            <p>Every Stage begins with an <strong>Opening Note</strong> answering why the creator started. Above the products, before the price, the human story is the first mechanic of trust.</p>
+            
+            <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 12px 14px; margin: 16px 0;">
+              <div style="font-size:11px; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">Core Principle §2</div>
+              <div style="font-size:12.5px; color:#E8DCED; line-height:1.4;">"Money can buy utility or amplification. It can never buy trust, rank, or relevance."</div>
+            </div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <span class="cust" style="position:static;"><svg class="ic sm fill"><use href="#i-spark"/></svg>Opening Night Cold-Start</span>
+              <span class="price" style="position:static; background:rgba(255,255,255,0.15); color:var(--gold);">No Bare Zeros</span>
+            </div>
+          </div>
+
+          <div class="hero-window-phone-wrap">
+            <div class="phone phone-feed-container" data-nav="home" style="transform:scale(0.88); transform-origin:center top;">
+              <div class="scroll">
+                <div class="hbar">
+                  <div class="hrow">
+                    <div class="brand">STAGE</div>
+                    <div class="r">
+                      <button class="ib ghost"><svg class="ic"><use href="#i-bell"/></svg><i class="dot"></i></button>
+                      <button class="ib ghost"><svg class="ic"><use href="#i-bag"/></svg><span class="badge">3</span></button>
+                    </div>
+                  </div>
+                  <nav class="tabs" role="tablist"></nav>
+                </div>
+                <div class="cols"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. Interactive Walkthrough Section: Audience & Performer Sandbox -->
+  <section id="experience" class="dark-walkthrough-section">
+    <div class="container">
+      
+      <!-- Experience Mode Switcher (The Two Journeys) -->
+      <div class="experience-mode-header">
+        <span class="experience-tag">Interactive Stage Sandbox</span>
+        <h2 class="experience-title">Experience both sides of Stage.</h2>
+
+        <div class="mode-switcher-bar">
+          <button class="mode-btn active" id="modeBtnAudience" data-mode="audience">
+            <svg class="ic md"><use href="#i-users"/></svg>
+            <span>Audience ("I'm here for the show")</span>
+          </button>
+          <button class="mode-btn" id="modeBtnPerformer" data-mode="performer">
+            <svg class="ic md fill"><use href="#i-spark"/></svg>
+            <span>Performer ("I'm here to perform")</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="dark-walkthrough-grid">
+        
+        <!-- Left Sticky Sidebar Items -->
+        <div class="walkthrough-sidebar">
+          
+          <!-- AUDIENCE NAV ITEMS -->
+          <div class="nav-group-audience">
+            <div class="walkthrough-nav-item active" data-panel="panel-feed">
+              <h3>1. Your Stage (Feed)</h3>
+              <p>Masonry feed shaped by interests. Features protected <strong>Opening Night</strong> slots so brand-new sellers are never buried by algorithms.</p>
+            </div>
+
+            <div class="walkthrough-nav-item" data-panel="panel-bubbles">
+              <h3>2. Explore (Bubbles & List)</h3>
+              <p>Toggle between interactive floating bubbles with rotating shouts, or a scannable list view sorted by busiest, newest, or A–Z.</p>
+            </div>
+
+            <div class="walkthrough-nav-item" data-panel="panel-storefront">
+              <h3>3. Storefront (The Person First)</h3>
+              <p>Meet the creator before the catalog. Prominent <strong>Opening Note</strong> with voice clip, self-named categories, and direct contact.</p>
+            </div>
+
+            <div class="walkthrough-nav-item" data-panel="panel-custom">
+              <h3>4. Customization Tiers</h3>
+              <p>Three honest tiers: Fixed, Configurable options, Personalized with live SVG lettering, and Custom Requests.</p>
+            </div>
+
+            <div class="walkthrough-nav-item" data-panel="panel-cart">
+              <h3>5. Seller-Grouped Cart & Checkout</h3>
+              <p>Subtotals kept separate per seller. Checkout generates direct WhatsApp/Telegram links with 4-digit receipt verification codes.</p>
+            </div>
+
+            <div class="walkthrough-nav-item" data-panel="panel-drops">
+              <h3>6. Drops (Curtain Theatre)</h3>
+              <p>Theatrical scheduled reveals. Peek behind the velvet curtain, watch live synchronized countdowns, and set reminders.</p>
+            </div>
+          </div>
+
+          <!-- PERFORMER NAV ITEMS -->
+          <div class="nav-group-performer" style="display:none;">
+            <div class="walkthrough-nav-item" data-panel="panel-wizard">
+              <h3>1. Create Your Stage</h3>
+              <p>Build your storefront <em>before</em> registering an account. Write your Opening Note, name your own categories, and pick WhatsApp/Telegram.</p>
+            </div>
+
+            <div class="walkthrough-nav-item" data-panel="panel-opening-night">
+              <h3>2. Opening Night Launch</h3>
+              <p>Cold-start discovery protection: guaranteed placement in feed and explore for a fixed window when your Stage goes live.</p>
+            </div>
+
+            <div class="walkthrough-nav-item" data-panel="panel-backstage">
+              <h3>3. Backstage (Order Lifecycle)</h3>
+              <p>A calm order manager. Accept or advance orders across the 5-step lifecycle using 4-digit receipt verification codes.</p>
+            </div>
+
+            <div class="walkthrough-nav-item" data-panel="panel-buzz">
+              <h3>4. Stage Buzz (No Bare Zeros)</h3>
+              <p>Absence isn't negative! Never display depressing "0 views, 0 sales". See how Stage replaces bare zeros with supportive waiting states.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Interactive Display Frame -->
+        <div class="walkthrough-display-frame">
+          
+          <!-- AUDIENCE PANEL 1: Masonry Feed -->
+          <div id="panel-feed" class="walkthrough-panel active">
+            <div class="phone phone-feed-container" data-nav="home" style="margin: 0 auto;">
+              <div class="scroll">
+                <div class="hbar">
+                  <div class="hrow">
+                    <div class="brand">STAGE</div>
+                    <div class="r">
+                      <button class="ib ghost"><svg class="ic"><use href="#i-bell"/></svg><i class="dot"></i></button>
+                      <button class="ib ghost" id="feedCartBtn"><svg class="ic"><use href="#i-bag"/></svg><span class="badge">3</span></button>
+                    </div>
+                  </div>
+                  <nav class="tabs" role="tablist"></nav>
+                </div>
+                <div class="cols"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AUDIENCE PANEL 2: Shout Bubbles & List View -->
+          <div id="panel-bubbles" class="walkthrough-panel">
+            <div class="phone" data-nav="explore" style="margin: 0 auto;">
+              <div class="scroll">
+                <div class="exh">
+                  <h2>Explore</h2>
+                  <div class="ex-view-header">
+                    <p style="margin:0;">Discover businesses, not just items.</p>
+                    <div class="view-toggle" id="exploreViewToggle">
+                      <button class="active" data-view="bubbles"><svg class="ic sm"><use href="#i-bubble"/></svg>Bubbles</button>
+                      <button data-view="list"><svg class="ic sm"><use href="#i-list"/></svg>List</button>
+                    </div>
+                  </div>
+
+                  <div class="srch"><svg class="ic md"><use href="#i-search"/></svg>Search businesses, products…</div>
+                  <div class="chips" id="chips">
+                    <button class="chip on" data-cat="All">All</button>
+                    <button class="chip" data-cat="Fashion" style="--c:#40214B"><i></i>Fashion</button>
+                    <button class="chip" data-cat="Gifts" style="--c:#EE9A22"><i></i>Gifts</button>
+                    <button class="chip" data-cat="Decor" style="--c:#8FA07A"><i></i>Decor</button>
+                    <button class="chip" data-cat="Beauty" style="--c:#E38F84"><i></i>Beauty</button>
+                    <button class="chip" data-cat="Food" style="--c:#C8693D"><i></i>Food</button>
+                    <button class="chip" data-cat="Tech" style="--c:#2F6F73"><i></i>Tech</button>
+                  </div>
+                </div>
+
+                <!-- Bubble View Container -->
+                <div class="field" id="field"></div>
+
+                <!-- NEW List View Container (Spec §5) -->
+                <div class="explore-list-view" id="exploreListView" style="display:none;"></div>
+              </div>
+
+              <!-- Quick Sheet Preview Modal -->
+              <div class="sheet" id="sheet" aria-hidden="true">
+                <button class="sheet-x" id="sheetX"><svg class="ic"><use href="#i-close"/></svg></button>
+                <div class="sheet-top">
+                  <span class="sheet-av" id="shAv"></span>
+                  <div>
+                    <h4 id="shName"></h4>
+                    <p class="meta" id="shMeta"></p>
+                  </div>
+                </div>
+                <p class="blurb" id="shBlurb"></p>
+                <div class="sheet-ac">
+                  <button class="btn-app solid" id="shFollow">Follow</button>
+                  <button class="btn-app line" id="shViewStage">View Stage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AUDIENCE PANEL 3: Storefront View (Opening Note Above Products) -->
+          <div id="panel-storefront" class="walkthrough-panel">
+            <div class="phone" style="margin: 0 auto;">
+              <div class="scroll sf-screen">
+                <div class="dhead">
+                  <button class="ib" id="sfBackBtn"><svg class="ic"><use href="#i-back"/></svg></button>
+                  <div class="ttl"><b>Storefront</b><small>Performer Profile</small></div>
+                  <button class="ib"><svg class="ic"><use href="#i-share"/></svg></button>
+                </div>
+
+                <div class="sf-hero">
+                  <div class="sf-avatar-row">
+                    <span class="sf-avatar-lg">GM</span>
+                    <div class="sf-titles">
+                      <h3>Gifted by Mimi <span class="ex-verified-badge" title="Verified Identity"><svg class="ic sm fill" style="fill:#fff;width:10px;height:10px;"><use href="#i-check"/></svg></span></h3>
+                      <p>Port Harcourt · Handcrafted gifts & wax aromatics</p>
+                    </div>
+                  </div>
+
+                  <!-- Spec §8: The Opening Note (Rendered above products, answering why creator started) -->
+                  <div class="opening-note-card">
+                    <div class="opening-note-tag">
+                      <svg class="ic sm fill"><use href="#i-spark"/></svg>
+                      <span>The Opening Note</span>
+                    </div>
+                    <p class="opening-note-text">
+                      "I started blending soy candles because store scents gave my sister headaches. Every jar is poured by hand in small batches of twelve, using real cedarwood and sweet amber. I hope it brings quiet to your evenings."
+                    </p>
+                    
+                    <!-- Spec §9: Optional Voice Note Attachment -->
+                    <div class="sf-voice-player">
+                      <button class="voice-play-btn" id="voicePlayBtn" aria-label="Play Mimi's voice note">▶</button>
+                      <span>Voice note from Mimi · 0:38</span>
+                      <div class="voice-waveform">
+                        <i class="voice-bar"></i><i class="voice-bar"></i><i class="voice-bar"></i>
+                        <i class="voice-bar"></i><i class="voice-bar"></i><i class="voice-bar"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="sf-actions-row">
+                    <button class="btn-sf btn-sf-solid" id="sfFollowMainBtn">Follow</button>
+                    <button class="btn-sf btn-sf-outline"><svg class="ic sm"><use href="#i-share"/></svg> Share</button>
+                    <a href="https://wa.me/2348000000000?text=Hi%20Mimi,%20I%20found%20your%20Stage!" target="_blank" class="btn-sf btn-sf-channel">
+                      <svg class="ic sm fill" style="fill:#fff;"><use href="#i-whatsapp"/></svg> WhatsApp
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Spec §6.3: Seller-Named Custom Categories (Not fixed taxonomy) -->
+                <div class="seller-cats-bar" id="sellerCatsBar">
+                  <button class="seller-cat-chip active" data-scat="all">All Pieces (6)</button>
+                  <button class="seller-cat-chip" data-scat="wax">Amber Melts</button>
+                  <button class="seller-cat-chip" data-scat="jars">Glow Jars</button>
+                  <button class="seller-cat-chip" data-scat="boxes">Gift Sets</button>
+                </div>
+
+                <!-- Storefront Product Grid -->
+                <div class="sf-product-grid" id="sfProductGrid">
+                  <div class="pimg" style="aspect-ratio:0.84;background-image:var(--img-candle)">
+                    <span class="cust"><svg class="ic sm fill"><use href="#i-spark"/></svg>Personalized</span>
+                    <button class="heart"><svg class="ic"><use href="#i-heart"/></svg></button>
+                    <span class="price">₦8,500</span>
+                  </div>
+                  <div class="pimg" style="aspect-ratio:0.96;background-image:var(--img-gift)">
+                    <button class="heart"><svg class="ic"><use href="#i-heart"/></svg></button>
+                    <span class="price">₦18,000</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- AUDIENCE PANEL 4: The 4 Customization Tiers -->
+          <div id="panel-custom" class="walkthrough-panel">
+            <div class="phone" style="margin: 0 auto;">
+              <div class="scroll">
+                <div class="dhead">
+                  <button class="ib"><svg class="ic"><use href="#i-back"/></svg></button>
+                  <div class="ttl"><b>Customization Engine</b><small>Spec §6.2: Three Honest Tiers</small></div>
+                  <button class="ib"><svg class="ic"><use href="#i-heart"/></svg></button>
+                </div>
+
+                <!-- Tier Selector Tabs -->
+                <div class="tier-selector" id="tierSelector">
+                  <button class="tier-tab-btn active" data-tier="personalized">Tier 3: Personalized</button>
+                  <button class="tier-tab-btn" data-tier="configurable">Tier 2: Configurable</button>
+                  <button class="tier-tab-btn" data-tier="fixed">Tier 1: Fixed Item</button>
+                  <button class="tier-tab-btn" data-tier="request">Tier 4: Request</button>
+                </div>
+
+                <!-- TIER 3: Personalized (Live Candle Inscription) -->
+                <div class="tier-content-box active" id="tierBoxPersonalized">
+                  <div class="cust-stage">
+                    <svg id="candle" viewBox="0 0 240 260">
+                      <defs>
+                        <linearGradient id="glassG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset=".2" stop-color="#fff" stop-opacity=".05"/><stop offset=".78" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".24"/></linearGradient>
+                        <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd27a" stop-opacity=".8"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>
+                      </defs>
+                      <ellipse cx="120" cy="238" rx="80" ry="9" fill="#5a3a20" opacity=".22"/>
+                      <circle cx="120" cy="50" r="48" fill="url(#glow)"/>
+                      <path d="M120 80V60" stroke="#3a2a22" stroke-width="3" stroke-linecap="round"/>
+                      <g class="flame"><path d="M120 22c9 12 12 20 12 27a12 12 0 0 1-24 0c0-7 3-14 12-27z" fill="#F7B23B"/><path d="M120 35c5 7 7 11 7 15a7 7 0 0 1-14 0c0-4 2-8 7-15z" fill="#FFF0B8"/></g>
+                      <rect id="jar" x="50" y="78" width="140" height="154" rx="20" fill="#D98B2B" style="transition:fill .3s"/>
+                      <rect x="50" y="78" width="140" height="154" rx="20" fill="url(#glassG)"/>
+                      <rect x="46" y="72" width="148" height="12" rx="6" fill="#C99A4E"/>
+                      <rect x="68" y="118" width="104" height="76" rx="8" fill="#FAF4E8"/>
+                      <rect x="73" y="123" width="94" height="66" rx="5" fill="none" stroke="#40214B" stroke-opacity=".22"/>
+                      <text id="lbl" x="120" y="160" text-anchor="middle" fill="#40214B"></text>
+                      <text x="120" y="180" text-anchor="middle" font-size="6.5" letter-spacing="1.6" fill="#7A697D" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600">AMBER GLOW · 200 G</text>
+                    </svg>
+                  </div>
+                  <div class="fld"><label for="nm">Name to engrave / message</label><input class="inp" id="nm" value="Amara" maxlength="14" autocomplete="off" spellcheck="false"></div>
+                  <div class="fld"><span class="lb">Lettering typography</span>
+                    <div class="seg full" id="fonts"><button class="on" data-f="script">Script</button><button data-f="serif">Serif</button><button data-f="block">Block</button></div>
+                  </div>
+                  <div class="fld"><span class="lb">Jar shade · <span id="swName">Amber</span></span>
+                    <div class="sw" id="sw">
+                      <button class="on" style="--c:#D98B2B" data-n="Amber"></button>
+                      <button style="--c:#E6A79E" data-n="Blush"></button>
+                      <button style="--c:#9FB28C" data-n="Sage"></button>
+                      <button style="--c:#2F2436" data-n="Ink"></button>
+                    </div>
+                  </div>
+                  <div class="note"><svg class="ic md"><use href="#i-clock"/></svg>Personalized made-to-order. Carried with order.</div>
+                </div>
+
+                <!-- TIER 2: Configurable -->
+                <div class="tier-content-box" id="tierBoxConfigurable">
+                  <div style="padding:14px; background:#fff; border-radius:18px; margin-bottom:12px;">
+                    <span class="tier-badge">Tier 2: Configurable</span>
+                    <h4 style="font-size:16px; margin:4px 0 6px;">Select Options Before Add-to-Cart</h4>
+                    <p style="font-size:12px; color:var(--ink-muted); margin-bottom:12px;">Defined options set by seller (e.g. Size, Scent). Required before add.</p>
+                    <div class="fld" style="padding:0 0 12px;"><label>Select Scent Blend</label>
+                      <div class="seg full"><button class="on">Warm Amber</button><button>Oud Cedar</button><button>Sea Mist</button></div>
+                    </div>
+                    <div class="fld" style="padding:0;"><label>Select Jar Size</label>
+                      <div class="seg full"><button class="on">200g (₦8,500)</button><button>450g (₦16,000)</button></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TIER 1: Fixed Item -->
+                <div class="tier-content-box" id="tierBoxFixed">
+                  <div style="padding:14px; background:#fff; border-radius:18px; margin-bottom:12px;">
+                    <span class="tier-badge">Tier 1: Fixed Product</span>
+                    <h4 style="font-size:16px; margin:4px 0 6px;">Straight Add-to-Bag</h4>
+                    <p style="font-size:12px; color:var(--ink-muted); margin-bottom:12px;">Fixed items require zero options. One tap adds them directly to your seller cart.</p>
+                    <div style="display:flex; align-items:center; gap:12px; background:var(--tile); padding:10px; border-radius:14px;">
+                      <span style="width:40px; height:40px; border-radius:8px; background-image:var(--img-whitetop); background-size:cover;"></span>
+                      <div style="flex:1;"><b>White Peplum Top</b><small style="display:block; color:var(--ink-muted);">Bella's Closet</small></div>
+                      <b style="color:var(--plum);">₦12,000</b>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TIER 4: Custom Request -->
+                <div class="tier-content-box" id="tierBoxRequest">
+                  <div class="tier-request-panel">
+                    <span class="tier-badge">Tier 4: Custom Request</span>
+                    <h4>"Tell us what you'd like"</h4>
+                    <p>No upfront price. Seller reviews your request and agrees on price before anything is crafted.</p>
+                    <textarea class="tier-request-textarea" placeholder="Describe the bespoke piece, dimensions, or custom fabrics you envision…"></textarea>
+                    <button class="btn-sf btn-sf-solid" style="width:100%; height:40px;" id="btnSendReq">Send Request to Performer</button>
+                  </div>
+                </div>
+
+              </div>
+              <div class="cta-app"><button class="btn-app solid wide" id="custCta">Add to Bag · ₦10,000</button></div>
+            </div>
+          </div>
+
+          <!-- AUDIENCE PANEL 5: Seller-Grouped Cart & WhatsApp / Telegram Checkout -->
+          <div id="panel-cart" class="walkthrough-panel">
+            <div class="phone" style="margin: 0 auto;">
+              <div class="scroll">
+                <div class="dhead">
+                  <button class="ib"><svg class="ic"><use href="#i-back"/></svg></button>
+                  <div class="ttl"><b>Your Bag</b><small>Spec §6.5: Grouped by Seller</small></div>
+                  <span class="badge" style="position:static;">3 items</span>
+                </div>
+
+                <div class="cart-wrap">
+                  
+                  <!-- Group 1: Bella's Closet (WhatsApp Route) -->
+                  <div class="cart-seller-card">
+                    <div class="cart-seller-top">
+                      <div class="cart-seller-brand">
+                        <span class="av bc">BC</span>
+                        <span>Bella's Closet</span>
+                      </div>
+                      <span class="cart-channel-tag cart-channel-wa">
+                        <svg class="ic sm fill" style="fill:#128C7E;"><use href="#i-whatsapp"/></svg> WhatsApp
+                      </span>
+                    </div>
+
+                    <div class="cart-item-row">
+                      <div class="cart-item-img" style="background-image:var(--img-model);"></div>
+                      <div class="cart-item-desc">
+                        <b>Black Two-Piece</b>
+                        <small>Size: M · Standard cut</small>
+                      </div>
+                      <div class="cart-item-price">₦25,000</div>
+                    </div>
+
+                    <div class="cart-item-row">
+                      <div class="cart-item-img" style="background-image:var(--img-whitetop);"></div>
+                      <div class="cart-item-desc">
+                        <b>White Peplum Top</b>
+                        <small>Size: S</small>
+                      </div>
+                      <div class="cart-item-price">₦12,000</div>
+                    </div>
+
+                    <div class="cart-seller-subtotal">
+                      <span>Subtotal (2 pieces)</span>
+                      <b>₦37,000</b>
+                    </div>
+
+                    <button class="btn-checkout-channel btn-checkout-wa" data-biz="bc">
+                      <svg class="ic sm fill" style="fill:#fff;"><use href="#i-whatsapp"/></svg>
+                      <span>Checkout via WhatsApp</span>
+                    </button>
+                  </div>
+
+                  <!-- Group 2: Gifted by Mimi (Telegram Route) -->
+                  <div class="cart-seller-card">
+                    <div class="cart-seller-top">
+                      <div class="cart-seller-brand">
+                        <span class="av gm">GM</span>
+                        <span>Gifted by Mimi</span>
+                      </div>
+                      <span class="cart-channel-tag cart-channel-tg">
+                        <svg class="ic sm fill" style="fill:#0088CC;"><use href="#i-telegram"/></svg> Telegram
+                      </span>
+                    </div>
+
+                    <div class="cart-item-row">
+                      <div class="cart-item-img" style="background-image:var(--img-candle);"></div>
+                      <div class="cart-item-desc">
+                        <b>Amber Glow Candle</b>
+                        <small>Personalized: "Amara" · Script</small>
+                      </div>
+                      <div class="cart-item-price">₦10,000</div>
+                    </div>
+
+                    <div class="cart-seller-subtotal">
+                      <span>Subtotal (1 piece)</span>
+                      <b>₦10,000</b>
+                    </div>
+
+                    <button class="btn-checkout-channel btn-checkout-tg" data-biz="gm">
+                      <svg class="ic sm fill" style="fill:#fff;"><use href="#i-telegram"/></svg>
+                      <span>Checkout via Telegram</span>
+                    </button>
+                  </div>
+
+                  <!-- Grand Total Card -->
+                  <div class="cart-grand-card">
+                    <div>
+                      <small>Overall Bag Total (2 Performers)</small>
+                      <b>₦47,000</b>
+                    </div>
+                    <div style="font-size:11px; opacity:0.85; text-align:right;">
+                      2 Distinct Orders<br>No Payment Intermediary
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Live WhatsApp/Telegram Deep Link Simulation Modal -->
+              <div class="order-route-modal" id="orderRouteModal">
+                <div class="order-route-box">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div class="order-receipt-tag" id="modalReceiptCode">#STG-7412</div>
+                    <button class="sheet-x" style="position:static;" id="closeOrderModal"><svg class="ic"><use href="#i-close"/></svg></button>
+                  </div>
+                  
+                  <h4 id="modalOrderTitle" style="font-family:var(--f-display); font-size:18px; margin:4px 0 2px;">Order Ready for WhatsApp</h4>
+                  <p style="font-size:11.5px; color:var(--ink-muted); margin:0;">Stage compiles your order into a pre-filled chat link directly to the seller.</p>
+
+                  <div class="order-message-preview" id="modalOrderMsg"></div>
+
+                  <!-- Spec §6.4: Order Lifecycle Stepper -->
+                  <div class="order-stepper">
+                    <div class="step-item active"><div class="step-item-dot">1</div>Pending</div>
+                    <div class="step-item"><div class="step-item-dot">2</div>Confirmed</div>
+                    <div class="step-item"><div class="step-item-dot">3</div>Processing</div>
+                    <div class="step-item"><div class="step-item-dot">4</div>Ready</div>
+                    <div class="step-item"><div class="step-item-dot">5</div>Completed</div>
+                  </div>
+
+                  <button class="btn-app solid wide" id="modalOpenChatBtn" style="margin-top:14px;">Open Direct Chat</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- AUDIENCE PANEL 6: Drops Theatre -->
+          <div id="panel-drops" class="walkthrough-panel">
+            <div class="phone" style="margin: 0 auto;">
+              <div class="scroll">
+                <div class="dr-head"><h2>Drops</h2><div class="seg"><button class="on">Tonight</button><button>This week</button></div></div>
+                <div class="theatre" id="theatre">
+                  <div class="th-back"></div><div class="th-floor"></div><div class="th-mys"></div><div class="th-spot"></div>
+                  <div class="curtain l"></div><div class="curtain r"></div><div class="valance"></div>
+                  <button class="peek" id="peek">Peek behind the curtain</button>
+                </div>
+                <div class="drop-info">
+                  <div class="di-biz"><span class="av">BC</span>Bella’s Closet</div>
+                  <h3>The Midnight Set</h3>
+                  <p>Six pieces in small batches. The full reveal is at 7:00 pm.</p>
+                  <div class="count" aria-live="off">
+                    <div><b id="hh">02</b><small>hours</small></div><span class="sep">:</span>
+                    <div><b id="mm">14</b><small>minutes</small></div><span class="sep">:</span>
+                    <div><b id="ss">37</b><small>seconds</small></div>
+                  </div>
+                  <button class="btn-app solid wide" id="remind"><svg class="ic md"><use href="#i-bell"/></svg><span>Remind me</span></button>
+                </div>
+                <div class="up">
+                  <h4>Coming up</h4>
+                  <div class="upl">
+                    <div class="uprow"><span class="av lg kj">KJ</span><div><b>Kicks by Jay</b><small>Sneaker restock · Sun, 10:00 am</small></div><button class="bell"><svg class="ic md"><use href="#i-bell"/></svg></button></div>
+                    <div class="uprow"><span class="av lg gm">GM</span><div><b>Gifted by Mimi</b><small>Weekend gift boxes · Wed, 6:00 pm</small></div><button class="bell"><svg class="ic md"><use href="#i-bell"/></svg></button></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PERFORMER PANEL 1: Create Your Stage Wizard (Spec §4) -->
+          <div id="panel-wizard" class="walkthrough-panel">
+            <div class="phone" style="margin: 0 auto;">
+              <div class="scroll">
+                <div class="dhead">
+                  <div class="ttl"><b>Create Your Stage</b><small>Step 2 of 4 · Before Registration</small></div>
+                  <span class="opening-night-pill">Free Setup</span>
+                </div>
+
+                <div class="wizard-box">
+                  <div class="wizard-steps-header">
+                    <div class="wizard-step-indicator">
+                      <i class="wizard-step-dot active"></i>
+                      <i class="wizard-step-dot active"></i>
+                      <i class="wizard-step-dot"></i>
+                      <i class="wizard-step-dot"></i>
+                    </div>
+                    <span style="font-size:11.5px; font-weight:700; color:var(--plum);">The Opening Note</span>
+                  </div>
+
+                  <div class="wizard-title-block">
+                    <h3>What do you want people to feel?</h3>
+                    <p>The single most important field on your storefront. Customers see your story before your catalog.</p>
+                  </div>
+
+                  <div class="wizard-card-prompt">
+                    <b>Why did you start this?</b>
+                    <small>Tell customers who you are, what inspires your pieces, and why you pour care into your craft.</small>
+                    <textarea class="inp" id="wizNoteInput" style="height:86px; padding:10px; margin-top:8px; font-size:13px; resize:none;">I make hand-tailored linen sets that feel like a breath of fresh air in the Lagos heat. Every seam is double-stitched for longevity.</textarea>
+                  </div>
+
+                  <div class="fld" style="padding:0 0 10px;">
+                    <label>Your Self-Named Categories (Free Text)</label>
+                    <input class="inp" value="Two Pieces, Peplum Tops, Evening Sets" placeholder="e.g. Arabian Mists, Wax Melts, Baby Tops">
+                  </div>
+
+                  <div class="fld" style="padding:0 0 10px;">
+                    <label>Choose Order Routing Channel</label>
+                    <div class="wizard-channel-choice">
+                      <button class="channel-btn active wa" id="wizChanWa">
+                        <svg class="ic md fill" style="fill:#25D366;"><use href="#i-whatsapp"/></svg>
+                        <span>WhatsApp</span>
+                      </button>
+                      <button class="channel-btn tg" id="wizChanTg">
+                        <svg class="ic md fill" style="fill:#0088CC;"><use href="#i-telegram"/></svg>
+                        <span>Telegram</span>
+                      </button>
+                    </div>
+                    <input class="inp" id="wizHandleInput" value="+234 812 345 6789" placeholder="Enter phone number (WhatsApp) or @username">
+                  </div>
+
+                  <div class="note" style="padding:10px 0 20px;">
+                    <svg class="ic md"><use href="#i-spark"/></svg>
+                    <span>Account registration is asked <em>after</em> previewing your Stage.</span>
+                  </div>
+
+                  <button class="btn-app solid wide" id="wizPreviewBtn">Preview My Stage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PERFORMER PANEL 2: Opening Night Discovery Guarantee (Spec §7) -->
+          <div id="panel-opening-night" class="walkthrough-panel">
+            <div class="phone" style="margin: 0 auto;">
+              <div class="scroll">
+                <div class="dhead">
+                  <div class="ttl"><b>Opening Night</b><small>Cold-Start Discovery Window</small></div>
+                  <span class="opening-night-pill">Protected Slot</span>
+                </div>
+
+                <div style="padding: 16px 14px 100px;">
+                  <div style="background: radial-gradient(circle at center, #ffd27a 0%, var(--gold) 100%); color:#21132A; border-radius:22px; padding:20px; text-align:center; box-shadow:0 10px 30px rgba(238, 154, 34, 0.35); margin-bottom:18px;">
+                    <div style="font-family:var(--f-display); font-size:32px; font-weight:700; line-height:1;">5 Days Left</div>
+                    <div style="font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-top:4px;">Guaranteed Discovery Protection</div>
+                    <p style="font-size:12.5px; line-height:1.45; margin:10px 0 0; opacity:0.9;">
+                      Your Stage has protected placement in the feed & Explore. You never compete against older accounts with thousands of past sales.
+                    </p>
+                  </div>
+
+                  <div style="background:#fff; border-radius:18px; padding:16px; border:1px solid rgba(64, 33, 75, 0.1); margin-bottom:14px;">
+                    <h4 style="font-size:15px; margin-bottom:6px;">How Opening Night protects you:</h4>
+                    <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; font-size:12.5px; color:var(--ink-muted);">
+                      <li>✓ Featured prominently on the "For You" audience feed</li>
+                      <li>✓ Marked with the golden radiant Opening Night ring</li>
+                      <li>✓ Discovery is 100% organic — money cannot outrank you</li>
+                      <li>✓ When window ends, future hype is powered by your <strong>Drops</strong></li>
+                    </ul>
+                  </div>
+
+                  <div style="background:var(--tile); border-radius:14px; padding:12px; font-size:12px; color:var(--ink-primary);">
+                    <b>Stage Ethos:</b> We never show you "why didn't this sell" demoralizing diagnostics. Your opening note can be revised anytime you like.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PERFORMER PANEL 3: Backstage (Order Lifecycle & Receipts) -->
+          <div id="panel-backstage" class="walkthrough-panel">
+            <div class="phone" style="margin: 0 auto;">
+              <div class="scroll">
+                <div class="dhead">
+                  <div class="ttl"><b>Backstage</b><small>Order Routing & Receipts</small></div>
+                  <span class="badge" style="position:static;">2 New</span>
+                </div>
+
+                <div class="backstage-box">
+                  
+                  <!-- Order 1 -->
+                  <div class="backstage-order-card">
+                    <div class="backstage-order-top">
+                      <span class="bs-receipt">#STG-8492</span>
+                      <span class="bs-status pending" id="bsStatus1">Pending Confirmation</span>
+                    </div>
+                    <div class="backstage-order-detail">
+                      <b>Amara Okafor · ₦25,000</b>
+                      <small style="color:var(--ink-muted);">Black Two-Piece (M) · Via WhatsApp</small>
+                    </div>
+                    <div class="backstage-actions">
+                      <button class="bs-btn bs-btn-primary" id="bsAdvance1">Advance to Confirmed</button>
+                      <button class="bs-btn bs-btn-ghost">Decline</button>
+                    </div>
+                  </div>
+
+                  <!-- Order 2 -->
+                  <div class="backstage-order-card">
+                    <div class="backstage-order-top">
+                      <span class="bs-receipt">#STG-7412</span>
+                      <span class="bs-status confirmed">Confirmed</span>
+                    </div>
+                    <div class="backstage-order-detail">
+                      <b>Chioma Adebayo · ₦10,000</b>
+                      <small style="color:var(--ink-muted);">Amber Glow Candle ("Amara") · Via Telegram</small>
+                    </div>
+                    <div class="backstage-actions">
+                      <button class="bs-btn bs-btn-primary">Mark as Ready</button>
+                      <button class="bs-btn bs-btn-ghost">Chat Buyer</button>
+                    </div>
+                  </div>
+
+                  <div style="background:#fff; border-radius:14px; padding:12px; border:1px solid rgba(64,33,75,0.08); font-size:11.5px; color:var(--ink-muted);">
+                    <svg class="ic sm" style="display:inline; vertical-align:middle; margin-right:4px;"><use href="#i-shield"/></svg>
+                    4-digit receipt codes power verified sales proof and future Spotlight eligibility.
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PERFORMER PANEL 4: Stage Buzz & Absence Isn't Negative (Spec §10) -->
+          <div id="panel-buzz" class="walkthrough-panel">
+            <div class="phone" style="margin: 0 auto;">
+              <div class="scroll">
+                <div class="dhead">
+                  <div class="ttl"><b>Stage Buzz</b><small>Spec §10: Absence Isn't Negative</small></div>
+                  <span class="opening-night-pill">No Bare Zeros</span>
+                </div>
+
+                <div class="buzz-box">
+                  <div class="buzz-comparison-toggle">
+                    <button class="buzz-toggle-btn active" id="btnBuzzStage" data-buzz="stage">Stage Rule</button>
+                    <button class="buzz-toggle-btn" id="btnBuzzOld" data-buzz="antipattern">Standard App Anti-Pattern</button>
+                  </div>
+
+                  <!-- Stage's Empathetic Design -->
+                  <div class="buzz-view-panel active" id="buzzStagePanel">
+                    <div class="buzz-state-card buzz-state-stage">
+                      <h4>
+                        <svg class="ic sm fill" style="fill:var(--gold);"><use href="#i-spark"/></svg>
+                        <span>Opening Night in Progress</span>
+                      </h4>
+                      <p>
+                        "Waiting for your first view — once people start finding your Stage in the feed, you'll see real counts here."
+                      </p>
+                    </div>
+
+                    <div style="background:#FFFFFF; border-radius:18px; padding:14px; border:1px solid rgba(64,33,75,0.08); margin-bottom:12px;">
+                      <div style="font-size:12px; font-weight:700; color:var(--plum); margin-bottom:6px;">Next Launch Milestone</div>
+                      <div style="font-size:12.5px; color:var(--ink-muted); line-height:1.4;">
+                        Your first drop curtain is primed. When your first order is verified, this switches permanently to real numbers.
+                      </div>
+                    </div>
+
+                    <div style="font-size:11.5px; color:var(--ink-muted); text-align:center; padding:10px;">
+                      Zero demoralizing 0s. Zero comparative rank shaming.
+                    </div>
+                  </div>
+
+                  <!-- Demoralizing Anti-Pattern -->
+                  <div class="buzz-view-panel" id="buzzOldPanel">
+                    <div class="buzz-state-card buzz-state-antipattern">
+                      <h4>What Other Platforms Show (The Churn Trigger):</h4>
+                      <div class="bare-zero-grid">
+                        <div class="bare-zero-card">
+                          <b>0</b>
+                          <small>Followers</small>
+                        </div>
+                        <div class="bare-zero-card">
+                          <b>0</b>
+                          <small>Total Views</small>
+                        </div>
+                        <div class="bare-zero-card">
+                          <b>0</b>
+                          <small>Sales</small>
+                        </div>
+                      </div>
+                    </div>
+                    <p style="font-size:11.5px; color:#C03816; line-height:1.4; padding:0 6px;">
+                      A bare "0" warns buyers away and demoralizes honest creators who just launched today. Stage strictly bans bare zeros.
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Showcase Gallery (Reframed Around Genuine Stage Hallmarks) -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      
+      <h2 class="gallery-section-title">Built for craft.<br>Honest by architecture.</h2>
+      <p class="gallery-section-sub">Every mechanic on Stage was designed to make a stranger find, understand, and trust a real person.</p>
+
+      <div class="gallery-cards-grid">
+        
+        <div class="gallery-card">
+          <div class="gallery-card-preview" style="background: radial-gradient(circle at center, #ffd27a, var(--gold));">
+            <span style="color:#21132A; font-family:var(--f-display); font-size:20px; font-weight:700; text-align:center; padding:0 16px;">
+              "The Opening Note"
+            </span>
+          </div>
+          <div>
+            <h4>Words Before Prices</h4>
+            <p>Every performer answers why they started. Customers meet the person and their inspiration before seeing a single price tag.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <div class="gallery-card-preview" style="background: radial-gradient(circle at center, #4d2560, #1d0d26);">
+            <span style="color:var(--gold); font-family:var(--f-display); font-size:24px; font-weight:600;">02 : 14 : 37</span>
+          </div>
+          <div>
+            <h4>Drop Night Hype</h4>
+            <p>Curtain reveals, synchronized countdowns, and scheduled reveals. Anticipation does the work a video algorithm once forced.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <div class="gallery-card-preview" style="background: #112F2B;">
+            <span style="background: rgba(37,211,102,0.15); border: 1px solid #25D366; color:#25D366; padding: 6px 14px; border-radius: 999px; font-size:13px; font-weight:700;">
+              wa.me & t.me direct
+            </span>
+          </div>
+          <div>
+            <h4>Channel-Agnostic Orders</h4>
+            <p>Orders route cleanly to WhatsApp or Telegram with 4-digit receipt codes. Stage never holds your money or takes a cut.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. The Stage Manifesto & Core Trust Principles (Replacing Fake SaaS Pricing) -->
+  <section id="manifesto" class="manifesto-section">
+    <div class="container">
+      
+      <div class="manifesto-hero-text">
+        <span class="manifesto-badge">The Stage Core Principle</span>
+        <h2 class="manifesto-title">
+          Money can buy utility or amplification.<br>
+          <span>It can never buy trust, rank, or relevance.</span>
+        </h2>
+        <p class="manifesto-sub">
+          Stage's first performers have only ever been found by people who already knew them. Every feature is audited against one question: does this make it easier for a stranger to find and trust that person?
+        </p>
+      </div>
+
+      <div class="manifesto-pillars-grid">
+        
+        <div class="pillar-box">
+          <div class="pillar-icon">
+            <svg class="ic"><use href="#i-shield"/></svg>
+          </div>
+          <h4>Identity Verification ≠ Rank</h4>
+          <p>A seller can confirm their identity to earn a Verified badge. That verification has <strong>zero effect on where they appear in search or discovery.</strong></p>
+          <span class="pillar-rule-tag">Rule §2: Trust cannot be bought</span>
+        </div>
+
+        <div class="pillar-box">
+          <div class="pillar-icon">
+            <svg class="ic"><use href="#i-spark"/></svg>
+          </div>
+          <h4>Spotlights are Gated by Sales Proof</h4>
+          <p>A seller can only pay to amplify their listing (a "Spotlight") <strong>after accumulating real, receipt-confirmed sales.</strong> Money amplifies proven craft; it cannot manufacture trust from nothing.</p>
+          <span class="pillar-rule-tag">Rule §11: Proof before amplification</span>
+        </div>
+
+        <div class="pillar-box">
+          <div class="pillar-icon">
+            <svg class="ic"><use href="#i-whatsapp"/></svg>
+          </div>
+          <h4>0% Commission · No Payment Trap</h4>
+          <p>Orders route directly to the seller's choice of WhatsApp or Telegram. Payments stay between customer and seller. Stage never acts as a tollbooth on your hustle.</p>
+          <span class="pillar-rule-tag">Rule §12: Direct routing without lock-in</span>
+        </div>
+
+        <div class="pillar-box">
+          <div class="pillar-icon">
+            <svg class="ic"><use href="#i-spark"/></svg>
+          </div>
+          <h4>Opening Night Cold-Start Guarantee</h4>
+          <p>Brand-new performers receive a guaranteed protected discovery window. Outside of algorithms, every new stage gets its spotlight to build their first audience.</p>
+          <span class="pillar-rule-tag">Rule §7: Cold-start protection</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. Side-by-Side Journeys Stepper (Spec §4 & §5) -->
+  <section id="journeys" class="journeys-section">
+    <div class="container">
+      
+      <span class="experience-tag" style="color:var(--plum);">User Flows by Design</span>
+      <h2 style="font-family:var(--f-display); font-size:clamp(32px,4.5vw,50px); font-weight:500; margin-bottom:12px;">
+        Two paths. One stage.
+      </h2>
+      <p style="font-size:16px; color:var(--ink-muted); max-width:620px; margin:0 auto;">
+        From the entry fork at the curtain to the receipt-confirmed purchase, every step follows clear build rules.
+      </p>
+
+      <div class="journeys-grid">
+        
+        <!-- Performer Journey -->
+        <div class="journey-column">
+          <div class="journey-header">
+            <div class="journey-badge-icon jb-performer">🎪</div>
+            <div>
+              <h3>The Performer Journey</h3>
+              <p>Build your stage before registering an account</p>
+            </div>
+          </div>
+
+          <div class="journey-steps-list">
+            <div class="journey-step-row">
+              <span class="step-num">1</span>
+              <div class="step-desc">
+                <b>Curtain Fork: "I'm here to perform"</b>
+                <p>Choose to build without a mandatory login wall upfront.</p>
+              </div>
+            </div>
+
+            <div class="journey-step-row">
+              <span class="step-num">2</span>
+              <div class="step-desc">
+                <b>The Opening Note & Custom Categories</b>
+                <p>Write your why, name your own category taxonomy, and pick WhatsApp or Telegram handle.</p>
+              </div>
+            </div>
+
+            <div class="journey-step-row">
+              <span class="step-num">3</span>
+              <div class="step-desc">
+                <b>Storefront Preview & Register</b>
+                <p>"Looks good? Let's put it on Stage." Details saved only after seeing what you built.</p>
+              </div>
+            </div>
+
+            <div class="journey-step-row">
+              <span class="step-num">4</span>
+              <div class="step-desc">
+                <b>Opening Night & Calm Dashboard</b>
+                <p>Launch with protected discovery. Manage via My Stage, Backstage, and Stage Buzz (no bare zeros).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audience Journey -->
+        <div class="journey-column">
+          <div class="journey-header">
+            <div class="journey-badge-icon jb-audience">🎭</div>
+            <div>
+              <h3>The Audience Journey</h3>
+              <p>Discover businesses and people, not isolated products</p>
+            </div>
+          </div>
+
+          <div class="journey-steps-list">
+            <div class="journey-step-row">
+              <span class="step-num">1</span>
+              <div class="step-desc">
+                <b>Curtain Fork: "I'm here for the show"</b>
+                <p>Pick a few interest chips (skippable) to shape initial feed.</p>
+              </div>
+            </div>
+
+            <div class="journey-step-row">
+              <span class="step-num">2</span>
+              <div class="step-desc">
+                <b>Explore Bubbles & List View</b>
+                <p>Discover busy stages via floating bubbles, or scannable rows with live shouts.</p>
+              </div>
+            </div>
+
+            <div class="journey-step-row">
+              <span class="step-num">3</span>
+              <div class="step-desc">
+                <b>Storefront & 3 Customization Tiers</b>
+                <p>Read the opening note, listen to voice clips, and pick fixed, configurable, or personalized goods.</p>
+              </div>
+            </div>
+
+            <div class="journey-step-row">
+              <span class="step-num">4</span>
+              <div class="step-desc">
+                <b>Seller-Grouped Cart & 4-Digit Receipt</b>
+                <p>Checkout generates one order per seller, routing to WhatsApp/Telegram with status tracking.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. Minimalist Architectural FAQ -->
+  <section id="faq" class="faq-ref-section">
+    <div class="container-narrow">
+      
+      <h2 class="faq-ref-title">Everything you<br>need to know.</h2>
+
+      <div class="faq-ref-list">
+        
+        <div class="faq-ref-item active">
+          <button class="faq-ref-question">
+            <span>Why doesn't Stage hold customer payments directly?</span>
+            <span class="faq-plus-icon">+</span>
+          </button>
+          <div class="faq-ref-answer">
+            Stage focuses on discovery, storefront identity, and order clarity. Payments stay directly between customer and seller on WhatsApp or Telegram. This avoids locking sellers into expensive payment gateway holds, lets buyers use their preferred local methods, and eliminates platform commission fees.
+          </div>
+        </div>
+
+        <div class="faq-ref-item">
+          <button class="faq-ref-question">
+            <span>How does the 4-digit receipt code work?</span>
+            <span class="faq-plus-icon">+</span>
+          </button>
+          <div class="faq-ref-answer">
+            Every order generated through Stage's WhatsApp or Telegram routing carries a unique 4-digit receipt code (e.g. #STG-7412). When the seller confirms the transaction, this code validates the sale in Backstage, increments verified Stage Buzz stats, and unlocks Spotlight eligibility.
+          </div>
+        </div>
+
+        <div class="faq-ref-item">
+          <button class="faq-ref-question">
+            <span>What is "Opening Night" and why is it guaranteed?</span>
+            <span class="faq-plus-icon">+</span>
+          </button>
+          <div class="faq-ref-answer">
+            New performers have zero followers and zero sales on day one. Typical algorithms bury new accounts because they lack engagement data. Opening Night gives every newly launched Stage guaranteed discovery placement outside of competitive ranking for a fixed window so strangers can discover them.
+          </div>
+        </div>
+
+        <div class="faq-ref-item">
+          <button class="faq-ref-question">
+            <span>Can I sell on Stage without being on camera?</span>
+            <span class="faq-plus-icon">+</span>
+          </button>
+          <div class="faq-ref-answer">
+            Absolutely. Video and voice media are purely additive, never mandatory. The core connection mechanic is the written Opening Note. A text-only storefront is treated as 100% complete by the system, and video accounts never receive an artificial rank boost.
+          </div>
+        </div>
+
+        <div class="faq-ref-item">
+          <button class="faq-ref-question">
+            <span>Why are storefront categories named by the seller?</span>
+            <span class="faq-plus-icon">+</span>
+          </button>
+          <div class="faq-ref-answer">
+            Stage does not force small businesses into generic platform taxonomies. A perfume creator might sell under "Arabian Mists" and "Wax Melts," while a fashion designer uses "Two Pieces" and "Baby Tops." You know your business and craft better than any generic category tree.
+          </div>
+        </div>
+
+        <div class="faq-ref-item">
+          <button class="faq-ref-question">
+            <span>What does "Absence isn't negative" mean?</span>
+            <span class="faq-plus-icon">+</span>
+          </button>
+          <div class="faq-ref-answer">
+            Displaying bare zeros ("0 reviews, 0 sales") makes honest new sellers look struggling and warns strangers away. Stage replaces bare zeros with neutral, encouraging markers ("Opening Night", "New to Stage", "Waiting for your first view") until real data is earned.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8. Final Call to Action -->
+  <section id="cta" class="final-cta-ref">
+    <div class="container">
+      <h2 class="final-cta-title">Your Stage<br>is ready.</h2>
+      <p class="final-cta-sub">Whether you're stepping up to perform or finding a seat in the audience, there's a place for you.</p>
+      
+      <div class="hero-fork-grid" style="margin-bottom: 24px;">
+        <button class="btn-fork btn-fork-performer" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'}); document.getElementById('modeBtnPerformer').click();">
+          <div class="fork-icon-wrap"><svg class="ic md fill" style="fill:var(--gold);"><use href="#i-spark"/></svg></div>
+          <div>
+            <div style="font-size:15px;">Create Your Stage</div>
+            <div style="font-size:11.5px; opacity:0.8;">Free · Build before you register</div>
+          </div>
+        </button>
+
+        <button class="btn-fork btn-fork-audience" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'}); document.getElementById('modeBtnAudience').click();">
+          <div class="fork-icon-wrap"><svg class="ic md"><use href="#i-users"/></svg></div>
+          <div>
+            <div style="font-size:15px;">Enter the Audience</div>
+            <div style="font-size:11.5px; opacity:0.8;">Explore drops & local craft</div>
+          </div>
+        </button>
+      </div>
+
+      <div style="max-width: 440px; margin: 0 auto 16px;">
+        <form id="earlyAccessForm" class="early-access-form" style="display:flex; gap:8px; background:#fff; padding:6px; border-radius:999px; box-shadow:0 10px 30px rgba(0,0,0,0.1);">
+          <input type="email" placeholder="Enter your email for opening updates..." required style="flex:1; border:0; background:transparent; padding:0 18px; font-size:15px; outline:none;">
+          <button type="submit" class="btn-pill-dark" style="height:44px;">Stay Posted</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Giant Typographic Footer -->
+  <footer class="footer-ref">
+    <div class="container">
+      
+      <div class="footer-ref-top">
+        <div>
+          <div style="font-family:var(--f-display); font-size:24px; font-weight:700; letter-spacing:0.12em; color:var(--gold);">STAGE</div>
+          <p style="font-size:12.5px; color:var(--ink-light-muted); margin-top:6px; max-width:320px;">
+            A place where you discover a person, not just a product.
+          </p>
+        </div>
+        <ul class="footer-ref-links">
+          <li><a href="#vision">The Vision</a></li>
+          <li><a href="#experience">Live Sandbox</a></li>
+          <li><a href="#manifesto">Trust Principles</a></li>
+          <li><a href="#journeys">Journeys</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Giant Architectural STAGE Wordmark -->
+      <div class="footer-giant-wordmark">
+        STAGE
+      </div>
+
+      <div class="footer-ref-bottom">
+        <div>© 2026 STAGE. ALL RIGHTS RESERVED.</div>
+        <div>HONEST COMMERCE · WHATSAPP & TELEGRAM ROUTED · NO COMMISSION</div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Main JavaScript Engine -->
+  <script src="main.js"></script>
+</body>
+</html>

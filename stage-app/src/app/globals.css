@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+:root {
+  --page: #EBE1CF;
+  --page-ink: #2A1830;
+  --page-muted: #6D5B70;
+  --cream: #FAF4E8;
+  --tile: #F3EAD9;
+  --plum: #40214B;
+  --plum-dark: #2A1830;
+  --plum-light: #63337A;
+  --gold: #EE9A22;
+  --gold-dark: #C97D12;
+  --blush: #F4C9BE;
+  --sage: #B9C6A6;
+  --ink: #2A1830;
+  --muted: #7A697D;
+  --coral: #E2532F;
+}
+
+@theme {
+  --color-page: var(--page);
+  --color-page-ink: var(--page-ink);
+  --color-page-muted: var(--page-muted);
+  --color-cream: var(--cream);
+  --color-tile: var(--tile);
+  --color-plum: var(--plum);
+  --color-plum-dark: var(--plum-dark);
+  --color-plum-light: var(--plum-light);
+  --color-gold: var(--gold);
+  --color-gold-dark: var(--gold-dark);
+  --color-blush: var(--blush);
+  --color-sage: var(--sage);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-coral: var(--coral);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-ui: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-script: 'Pinyon Script', cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background-color: var(--page);
+  color: var(--page-ink);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar styling */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Curtain animations */
+@keyframes curtainOpenLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-86%); }
+}
+
+@keyframes curtainOpenRight {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(86%); }
+}
+
+.curtain-left-open {
+  animation: curtainOpenLeft 1s cubic-bezier(0.6, 0.05, 0.2, 1) forwards;
+}
+
+.curtain-right-open {
+  animation: curtainOpenRight 1s cubic-bezier(0.6, 0.05, 0.2, 1) forwards;
+}
+
+/* Flame animation */
+@keyframes flameFlicker {
+  0%, 100% { transform: scale(1, 1) rotate(0); }
+  40% { transform: scale(0.93, 1.06) rotate(-2deg); }
+  70% { transform: scale(1.04, 0.96) rotate(2deg); }
+}
+
+.flame-anim {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: flameFlicker 1.6s ease-in-out infinite;
+}
+
+/* Drift animation for shout bubbles */
+@keyframes bubbleDrift {
+  from { transform: translate(-4px, -6px); }
+  to { transform: translate(5px, 7px); }
+}
+
+.bubble-drift {
+  animation: bubbleDrift 7s ease-in-out infinite alternate;
+}
